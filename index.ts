@@ -1,6 +1,6 @@
 import { AtpAgent } from "@atproto/api"
 import { CronJob } from "cron"
-const express = require("express")
+import express from "express"
 
 import { scrapePalabra } from "./scraper.js"
 
@@ -15,7 +15,7 @@ async function main() {
     console.log("Post hecho!")
 }
 
-const app = express
+const app = express()
 const port = process.env.PORT || 4000
 
 app.get("/", (req: any, res: any) => {
