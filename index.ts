@@ -1,6 +1,6 @@
 import { AtpAgent } from "@atproto/api"
 import { CronJob } from "cron"
-import express from "express"
+const express = require("express")
 
 import { scrapePalabra } from "./scraper.js"
 
