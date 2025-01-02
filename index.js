@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var api_1 = require("@atproto/api");
-var cron_1 = require("cron");
+var express = require("express");
 var scraper_js_1 = require("./scraper.js");
 // Agente de Bluesky
 var agent = new api_1.AtpAgent({ service: "https://bsky.social" });
@@ -62,6 +62,11 @@ function main() {
         });
     });
 }
-var scheduleExpression = "0 0 6 * * *";
-var job = new cron_1.CronJob(scheduleExpression, main);
-job.start();
+var app = express;
+var port = process.env.PORT || 4000;
+app.get("/", function (req, res) {
+    main();
+});
+app.listen(port, function () {
+    console.log("Escuchando en puerto ".concat(port));
+});

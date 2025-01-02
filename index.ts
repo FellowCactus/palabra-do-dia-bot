@@ -1,5 +1,6 @@
 import { AtpAgent } from "@atproto/api"
 import { CronJob } from "cron"
+const express = require("express")
 
 import { scrapePalabra } from "./scraper.js"
 
@@ -14,8 +15,13 @@ async function main() {
     console.log("Post hecho!")
 }
 
+const app = express
+const port = process.env.PORT || 4000
 
-const scheduleExpression = "0 0 6 * * *"
-const job = new CronJob(scheduleExpression, main)
+app.get("/", (req: any, res: any) => {
+    main()
+})
 
-job.start()
+app.listen(port, () => {
+    console.log(`Escuchando en puerto ${port}`)
+})
